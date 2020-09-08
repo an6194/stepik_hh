@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Вакансии | {{ block.super }}{% endblock title %}
+
+{% block content %}
+  <section>
+    <h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>{{ spec }}</strong></h1>
+    <p class="text-center pt-1">{{ vacancies.count }} вакансий</p>
+    {% include "base_vacancies_list.html" %}
+  </section>
+{% endblock content %}
