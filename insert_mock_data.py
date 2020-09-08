@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import mock_data as data
+
 from app_home.models import Company
 from app_vacancy.models import Vacancy, Specialty
 

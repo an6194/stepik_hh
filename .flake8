@@ -1,3 +1,5 @@
 [flake8]
 max-line-length = 120
 exclude = venv,migrations
+application-import-names = stepik_hh, app_home, app_vacancy
+import-order-style = pep8
