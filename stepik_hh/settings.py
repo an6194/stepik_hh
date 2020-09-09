@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'app_vacancy.apps.AppVacancyConfig',
     'app_home.apps.AppHomeConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
