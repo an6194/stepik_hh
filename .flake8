@@ -1,5 +1,5 @@
 [flake8]
 max-line-length = 120
-exclude = venv,migrations
+exclude = venv,migrations,insert_mock_data.py
 application-import-names = stepik_hh, app_home, app_vacancy
 import-order-style = pep8
