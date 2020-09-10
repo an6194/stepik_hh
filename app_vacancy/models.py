@@ -6,7 +6,7 @@ from app_home.models import Company
 
 
 class Specialty(models.Model):
-    code = models.CharField(max_length=80)
+    code = models.CharField(max_length=80, unique=True)
     title = models.CharField(max_length=120)
     picture = models.CharField(max_length=120, default='https://place-hold.it/100x60')
 
