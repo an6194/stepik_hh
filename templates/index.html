@@ -37,7 +37,7 @@
             <div class="card-body">
               <p class="card-text mb-2">{{ spec.title }}</p>
               <p class="card-text">
-                <a href="{% url 'vacancies_view_by_spec' spec.code %}">{{ spec.vacancies.count }} вакансий</a>
+                <a href="{% url 'vacancies_by_spec' spec.code %}">{{ spec.vacancies_count }} вакансий</a>
               </p>
             </div>
           </div>
@@ -52,12 +52,12 @@
       {% for company in companies %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-4 text-center mb-4">
-            <a href="{% url 'company_view' company.id %}" class="mx-auto d-block">
+            <a href="{% url 'company' company.id %}" class="mx-auto d-block">
               <img class="mx-auto d-block mw-100" src="{{ company.logo }}" width="150" alt="">
             </a>
             <div class="card-body">
               <p class="card-text">
-                <a href="{% url 'company_view' company.id %}">{{ company.vacancies.count }} вакансии</a>
+                <a href="{% url 'company' company.id %}">{{ company.vacancies_count }} вакансии</a>
               </p>
             </div>
           </div>

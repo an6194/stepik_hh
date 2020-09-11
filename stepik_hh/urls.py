@@ -21,8 +21,8 @@ from django.urls import path, include
 from app_home.views import MainView, CompanyView, custom_handler404, custom_handler500
 
 urlpatterns = [
-    path('', MainView.as_view(), name='main_view'),
-    path('companies/<int:company_id>', CompanyView.as_view(), name='company_view'),
+    path('', MainView.as_view(), name='main'),
+    path('companies/<int:company_id>', CompanyView.as_view(), name='company'),
     path('vacancies/', include('app_vacancy.urls')),
     path('admin/', admin.site.urls),
 ]
