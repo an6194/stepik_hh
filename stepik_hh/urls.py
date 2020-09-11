@@ -27,7 +27,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns += static(settings.STATIC_URL)
-
 handler404 = custom_handler404
 handler500 = custom_handler500
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
