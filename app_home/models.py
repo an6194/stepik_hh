@@ -14,7 +14,7 @@ class Company(models.Model):
     height_field = models.PositiveIntegerField(default=0)
     width_field = models.PositiveIntegerField(default=0)
     description = models.TextField()
-    employee_count = models.CharField(max_length=120)
+    employee_count = models.CharField(max_length=80)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="company")
 
 
