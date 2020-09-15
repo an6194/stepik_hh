@@ -134,3 +134,9 @@ MEDIA_SPECIALITY_IMAGE_DIR = 'speciality_images'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'main'
+LOGOUT_REDIRECT_URL = 'main'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

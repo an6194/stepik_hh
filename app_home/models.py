@@ -19,8 +19,8 @@ class Company(models.Model):
 
 
 class Application(models.Model):
-    written_username = models.CharField(max_length=120)
-    written_phone = models.CharField(max_length=120)
-    written_cover_letter = models.TextField()
+    written_username = models.CharField(max_length=120, verbose_name='Вас зовут')
+    written_phone = models.CharField(max_length=120, verbose_name='Ваш телефон')
+    written_cover_letter = models.TextField(verbose_name='Сопроводительное письмо')
     vacancy = models.ForeignKey('app_vacancy.Vacancy', on_delete=models.CASCADE, related_name="applications")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="applications")

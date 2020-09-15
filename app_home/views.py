@@ -34,7 +34,7 @@ class CompanyView(View):
 class MyCompanyView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
-        user = User.objects.get(user=request.user)
+        user = User.objects.get(id=request.user.id)
         try:
             company = Company.objects.get(owner=user)
         except Company.DoesNotExist:
@@ -47,7 +47,7 @@ class MyCompanyView(LoginRequiredMixin, View):
 class MyVacanciesView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
-        user = User.objects.get(user=request.user)
+        user = User.objects.get(id=request.user.id)
         try:
             company = Company.objects.get(owner=user)
         except Company.DoesNotExist:
@@ -61,7 +61,7 @@ class MyVacanciesView(LoginRequiredMixin, View):
 class MyVacancyView(LoginRequiredMixin, View):
 
     def get(self, request, vacancy_id, *args, **kwargs):
-        user = User.objects.get(user=request.user)
+        user = User.objects.get(id=request.user.id)
         try:
             company = Company.objects.get(owner=user)
         except Company.DoesNotExist:

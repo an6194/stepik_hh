@@ -35,7 +35,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('login/', MyLoginView.as_view(), name='ylogin'),
+    path('login/', MyLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', MySignupView.as_view(), name='signup'),
 ]
