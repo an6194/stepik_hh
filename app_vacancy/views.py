@@ -61,4 +61,3 @@ class ApplicationSendView(LoginRequiredMixin, View):
         f.user = User.objects.get(id=request.user.id)
         f.save()
         return redirect('application_send', vacancy_id)
-

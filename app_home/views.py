@@ -5,6 +5,7 @@ from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
+from app_home.forms import CompanyForm
 from app_home.models import Company
 from app_vacancy.models import Specialty, Vacancy
 
@@ -39,9 +40,16 @@ class MyCompanyView(LoginRequiredMixin, View):
             company = Company.objects.get(owner=user)
         except Company.DoesNotExist:
             return render(request, 'company_create.html')
+        form = CompanyForm(company)
         return render(request, 'company_edit.html', context={
-            'company': company,
+            'form': form,
         })
+
+    def post(self, request, *args, **kwargs):
+        f = CompanyForm(request.POST, request.FILES).save(commit=False)
+        f.owner = User.objects.get(id=request.user.id)
+        f.save()
+        return redirect('my_company')
 
 
 class MyVacanciesView(LoginRequiredMixin, View):
