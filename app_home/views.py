@@ -40,15 +40,23 @@ class MyCompanyView(LoginRequiredMixin, View):
             company = Company.objects.get(owner=user)
         except Company.DoesNotExist:
             return render(request, 'company_create.html')
-        form = CompanyForm(company)
+        form = CompanyForm(instance=company)
         return render(request, 'company_edit.html', context={
             'form': form,
         })
 
     def post(self, request, *args, **kwargs):
-        f = CompanyForm(request.POST, request.FILES).save(commit=False)
-        f.owner = User.objects.get(id=request.user.id)
-        f.save()
+        user = User.objects.get(id=request.user.id)
+        try:
+            company = Company.objects.get(owner=user)
+        except Company.DoesNotExist:
+            f = CompanyForm().save(commit=False)
+            f.owner = User.objects.get(id=request.user.id)
+            f.save()
+        else:
+            f = CompanyForm(request.POST, request.FILES, instance=company).save(commit=False)
+            f.owner = User.objects.get(id=request.user.id)
+            f.save()
         return redirect('my_company')
 
 
