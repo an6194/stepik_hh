@@ -21,7 +21,7 @@ from django.contrib.staticfiles import views
 from django.urls import path, include, re_path
 
 from app_home.views import MainView, CompanyView, custom_handler404, custom_handler500, \
-    MyCompanyView, MyVacanciesView, MyVacancyView
+    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView
 from stepik_hh.views import MyLoginView, MySignupView
 
 urlpatterns = [
@@ -29,6 +29,7 @@ urlpatterns = [
     path('companies/<int:company_id>/', CompanyView.as_view(), name='company'),
     path('vacancies/', include('app_vacancy.urls')),
     path('mycompany/', MyCompanyView.as_view(), name='my_company'),
+    path('mycompany/create/', CreateCompanyView.as_view(), name='create_company'),
     path('mycompany/vacancies/', MyVacanciesView.as_view(), name='my_vacancies'),
     path('mycompany/vacancies/<int:vacancy_id>/', MyVacancyView.as_view(), name='my_vacancy'),
     path('admin/', admin.site.urls),

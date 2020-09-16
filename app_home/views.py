@@ -47,16 +47,17 @@ class MyCompanyView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         user = User.objects.get(id=request.user.id)
-        try:
-            company = Company.objects.get(owner=user)
-        except Company.DoesNotExist:
-            f = CompanyForm().save(commit=False)
-            f.owner = User.objects.get(id=request.user.id)
-            f.save()
-        else:
-            f = CompanyForm(request.POST, request.FILES, instance=company).save(commit=False)
-            f.owner = User.objects.get(id=request.user.id)
-            f.save()
+        company = Company.objects.get(owner=user)
+        CompanyForm(request.POST, request.FILES, instance=company).save()
+        return redirect('my_company')
+
+
+class CreateCompanyView(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        f = CompanyForm().save(commit=False)
+        f.owner = User.objects.get(id=request.user.id)
+        f.save()
         return redirect('my_company')
 
 
