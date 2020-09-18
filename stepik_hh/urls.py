@@ -20,7 +20,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
 from app_home.views import MainView, CompanyView, custom_handler404, custom_handler500, \
-    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView, CreateVacancyView
+    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView, CreateVacancyView, MyResumeView, CreateResumeView
 from stepik_hh.views import MyLoginView, MySignupView
 
 urlpatterns = [
@@ -32,6 +32,8 @@ urlpatterns = [
     path('mycompany/vacancies/', MyVacanciesView.as_view(), name='my_vacancies'),
     path('mycompany/vacancies/create/', CreateVacancyView.as_view(), name='create_vacancy'),
     path('mycompany/vacancies/<int:vacancy_id>/', MyVacancyView.as_view(), name='my_vacancy'),
+    path('myresume/', MyResumeView.as_view(), name='my_resume'),
+    path('myresume/create/', CreateResumeView.as_view(), name='create_resume'),
     path('admin/', admin.site.urls),
 ]
 

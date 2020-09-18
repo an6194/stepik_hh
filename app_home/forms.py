@@ -1,10 +1,10 @@
 from django.forms import ModelForm, ModelChoiceField
 
-from app_home.models import Application, Company
-from app_vacancy.models import Vacancy, Specialty
+from app_home.models import Application, Company, Resume
+from app_vacancy.models import Vacancy
 
 
-class MyModelChoiceField(ModelChoiceField):
+class MySpecialtyChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.title
 
@@ -22,8 +22,18 @@ class CompanyForm(ModelForm):
 
 
 class VacancyForm(ModelForm):
-    specialty = MyModelChoiceField(queryset=Specialty.objects.all(), empty_label=None, label='Специальность')
-
     class Meta:
         model = Vacancy
         fields = ['title', 'specialty', 'salary_min', 'salary_max', 'skills', 'description']
+        field_classes = {
+            'specialty': MySpecialtyChoiceField,
+        }
+
+
+class ResumeForm(ModelForm):
+    class Meta:
+        model = Resume
+        fields = ['name', 'surname', 'status', 'salary', 'specialty', 'grade', 'education', 'experience', 'portfolio']
+        field_classes = {
+            'specialty': MySpecialtyChoiceField,
+        }

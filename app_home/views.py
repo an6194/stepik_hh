@@ -6,8 +6,8 @@ from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
-from app_home.forms import CompanyForm, VacancyForm
-from app_home.models import Company, Application
+from app_home.forms import CompanyForm, VacancyForm, ResumeForm
+from app_home.models import Company, Application, Resume
 from app_vacancy.models import Specialty, Vacancy
 
 
@@ -33,18 +33,10 @@ class CompanyView(View):
         })
 
 
-def user_company(user):
-    try:
-        company = Company.objects.get(owner=user)
-    except Company.DoesNotExist:
-        return None
-    return company
-
-
 class MyCompanyView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
-        company = user_company(User.objects.get(id=request.user.id))
+        company = Company.objects.filter(owner__id=request.user.id).first()
         if not company:
             return render(request, 'company_create.html')
         form = CompanyForm(instance=company)
@@ -53,7 +45,7 @@ class MyCompanyView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
-        company = user_company(User.objects.get(id=request.user.id))
+        company = Company.objects.filter(owner__id=request.user.id).first()
         if not company:
             return render(request, 'company_create.html')
         CompanyForm(request.POST, request.FILES, instance=company).save()
@@ -73,7 +65,7 @@ class CreateCompanyView(LoginRequiredMixin, View):
 class MyVacanciesView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
-        company = user_company(User.objects.get(id=request.user.id))
+        company = Company.objects.filter(owner__id=request.user.id).first()
         if not company:
             return redirect('my_company')
         vacancies = Vacancy.objects.filter(company=company).annotate(applications_count=Count('applications'))
@@ -85,7 +77,7 @@ class MyVacanciesView(LoginRequiredMixin, View):
 class CreateVacancyView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
-        company = user_company(User.objects.get(id=request.user.id))
+        company = Company.objects.filter(owner__id=request.user.id).first()
         if not company:
             return redirect('my_company')
         form = VacancyForm()
@@ -94,7 +86,7 @@ class CreateVacancyView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
-        company = user_company(User.objects.get(id=request.user.id))
+        company = Company.objects.filter(owner__id=request.user.id).first()
         if not company:
             return redirect('my_company')
         f = VacancyForm(request.POST).save(commit=False)
@@ -106,7 +98,7 @@ class CreateVacancyView(LoginRequiredMixin, View):
 class MyVacancyView(LoginRequiredMixin, View):
 
     def get(self, request, vacancy_id, *args, **kwargs):
-        company = user_company(User.objects.get(id=request.user.id))
+        company = Company.objects.filter(owner__id=request.user.id).first()
         if not company:
             return redirect('my_company')
         vacancy = get_object_or_404(Vacancy, company=company, id=vacancy_id)
@@ -118,7 +110,7 @@ class MyVacancyView(LoginRequiredMixin, View):
         })
 
     def post(self, request, vacancy_id, *args, **kwargs):
-        company = user_company(User.objects.get(id=request.user.id))
+        company = Company.objects.filter(owner__id=request.user.id).first()
         if not company:
             return redirect('my_company')
         try:
@@ -128,6 +120,41 @@ class MyVacancyView(LoginRequiredMixin, View):
         VacancyForm(request.POST, instance=vacancy).save()
         messages.add_message(request, messages.SUCCESS, 'Вакансия обновлена')
         return redirect('my_vacancy', vacancy_id)
+
+
+class MyResumeView(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        resume = Resume.objects.filter(user__id=request.user.id).first()
+        if not resume:
+            return render(request, 'resume_create.html')
+        form = ResumeForm(instance=resume)
+        return render(request, 'resume_edit.html', context={
+            'form': form,
+        })
+
+    def post(self, request, *args, **kwargs):
+        resume = Resume.objects.filter(user__id=request.user.id).first()
+        if not resume:
+            return render(request, 'resume_create.html')
+        ResumeForm(request.POST, instance=resume).save()
+        messages.add_message(request, messages.SUCCESS, 'Ваше резюме обновлено!')
+        return redirect('my_resume')
+
+
+class CreateResumeView(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'resume_edit.html', context={
+            'form': ResumeForm(),
+        })
+
+    def post(self, request, *args, **kwargs):
+        f = ResumeForm(request.POST).save(commit=False)
+        f.user = User.objects.get(id=request.user.id)
+        f.save()
+        messages.add_message(request, messages.SUCCESS, 'Ваше резюме успешно создано!')
+        return redirect('my_resume')
 
 
 def custom_handler404(request, exception):

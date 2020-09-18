@@ -7,6 +7,10 @@ def my_pages(request):
         back = True
         vacancy = False
         company = True
+    elif request.path.startswith('/my'):
+        back = True
+        vacancy = False
+        company = False
     else:
         back = False
         vacancy = False
