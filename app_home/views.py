@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from app_home.forms import CompanyForm, VacancyForm
-from app_home.models import Company
+from app_home.models import Company, Application
 from app_vacancy.models import Specialty, Vacancy
 
 
@@ -111,8 +111,10 @@ class MyVacancyView(LoginRequiredMixin, View):
             return redirect('my_company')
         vacancy = get_object_or_404(Vacancy, company=company, id=vacancy_id)
         form = VacancyForm(instance=vacancy)
+        applications = Application.objects.filter(vacancy__id=vacancy_id)
         return render(request, 'vacancy_edit.html', context={
             'form': form,
+            'applications': applications,
         })
 
     def post(self, request, vacancy_id, *args, **kwargs):

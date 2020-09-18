@@ -15,6 +15,9 @@ class Specialty(models.Model):
     height_field = models.PositiveIntegerField(default=0)
     width_field = models.PositiveIntegerField(default=0)
 
+    def __str__(self):
+        return self.code
+
 
 class Vacancy(models.Model):
     title = models.CharField(max_length=120, verbose_name='Название вакансии')
@@ -23,6 +26,6 @@ class Vacancy(models.Model):
     company = models.ForeignKey('app_home.Company', on_delete=models.CASCADE, related_name="vacancies")
     skills = models.CharField(max_length=120, verbose_name='Требуемые навыки')
     description = models.TextField(verbose_name='Описание вакансии')
-    salary_min = models.IntegerField(verbose_name='Зарплата от')
-    salary_max = models.IntegerField(verbose_name='Зарплата до')
+    salary_min = models.PositiveIntegerField(verbose_name='Зарплата от')
+    salary_max = models.PositiveIntegerField(verbose_name='Зарплата до')
     published_at = models.DateField(default=date.today)
