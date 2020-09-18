@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 
 from app_home.models import Application, Company
+from app_vacancy.models import Vacancy
 
 
 class ApplicationForm(ModelForm):
@@ -12,4 +13,10 @@ class ApplicationForm(ModelForm):
 class CompanyForm(ModelForm):
     class Meta:
         model = Company
-        fields = ['name', 'location', 'logo', 'description', 'employee_count']
+        fields = ['name', 'logo', 'location', 'employee_count', 'description']
+
+
+class VacancyForm(ModelForm):
+    class Meta:
+        model = Vacancy
+        fields = ['title', 'specialty', 'salary_min', 'salary_max', 'skills', 'description']

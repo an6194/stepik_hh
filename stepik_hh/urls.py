@@ -17,11 +17,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
-from django.contrib.staticfiles import views
-from django.urls import path, include, re_path
+from django.urls import path, include
 
 from app_home.views import MainView, CompanyView, custom_handler404, custom_handler500, \
-    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView
+    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView, CreateVacancyView
 from stepik_hh.views import MyLoginView, MySignupView
 
 urlpatterns = [
@@ -31,6 +30,7 @@ urlpatterns = [
     path('mycompany/', MyCompanyView.as_view(), name='my_company'),
     path('mycompany/create/', CreateCompanyView.as_view(), name='create_company'),
     path('mycompany/vacancies/', MyVacanciesView.as_view(), name='my_vacancies'),
+    path('mycompany/vacancies/create/', CreateVacancyView.as_view(), name='create_vacancy'),
     path('mycompany/vacancies/<int:vacancy_id>/', MyVacancyView.as_view(), name='my_vacancy'),
     path('admin/', admin.site.urls),
 ]
@@ -51,8 +51,5 @@ if settings.DEBUG:
     ] + urlpatterns
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
-    # urlpatterns += static(settings.STATIC_URL,
-    #                       document_root=settings.STATIC_ROOT)
-    urlpatterns += [
-        re_path(r'^static/(?P<path>.*)$', views.serve),
-    ]
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
