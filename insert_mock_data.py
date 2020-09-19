@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     Company.objects.bulk_create(
         [
-            Company(name=company['title'], employee_count=0)
+            Company(name=company['title'], owner=1)
             for company in data.companies
         ]
     )
