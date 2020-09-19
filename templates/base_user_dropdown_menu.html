@@ -1,6 +1,7 @@
 {% if request.user.is_authenticated %}
   <div class="btn-group">
-    <button type="button" class="btn dropdown-toggle font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn dropdown-toggle font-weight-bold" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
       {{ request.user.get_full_name }}
     </button>
     <div class="dropdown-menu dropdown-menu-right mt-3">

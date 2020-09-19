@@ -19,9 +19,13 @@
                       <div class="col-6 col-lg-8">
                         <p class="mb-1">{{ vacancy.title }}</p>
                         <p class="mb-1">
-                          <span class="mr-4">{{ vacancy.salary_min|intcomma }} - {{ vacancy.salary_max|intcomma }}</span>
+                          <span class="mr-4">
+                            {{ vacancy.salary_min|intcomma }} - {{ vacancy.salary_max|intcomma }}
+                          </span>
                           {% if vacancy.applications_count %}
-                            <a href="{% url 'my_vacancy' vacancy.id %}" class="text-info">{{ vacancy.applications_count }} отклика</a>
+                            <a href="{% url 'my_vacancy' vacancy.id %}" class="text-info">
+                              {{ vacancy.applications_count }} отклика
+                            </a>
                           {% else %}
                             <span class="text-muted">Нет откликов</span>
                           {% endif %}

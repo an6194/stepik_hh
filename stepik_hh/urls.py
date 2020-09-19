@@ -20,11 +20,13 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
 from app_home.views import MainView, CompanyView, custom_handler404, custom_handler500, \
-    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView, CreateVacancyView, MyResumeView, CreateResumeView
+    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView, CreateVacancyView, \
+    MyResumeView, CreateResumeView, SearchView
 from stepik_hh.views import MyLoginView, MySignupView
 
 urlpatterns = [
     path('', MainView.as_view(), name='main'),
+    path('search/', SearchView.as_view(), name='search'),
     path('companies/<int:company_id>/', CompanyView.as_view(), name='company'),
     path('vacancies/', include('app_vacancy.urls')),
     path('mycompany/', MyCompanyView.as_view(), name='my_company'),

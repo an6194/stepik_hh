@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
@@ -19,6 +19,16 @@ class MainView(View):
         return render(request, 'index.html', context={
             'specs': specs,
             'companies': companies,
+        })
+
+
+class SearchView(View):
+
+    def get(self, request, *args, **kwargs):
+        query = request.GET['s']
+        vacancies = Vacancy.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        return render(request, 'search.html', context={
+            'vacancies': vacancies,
         })
 
 
