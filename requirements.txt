@@ -12,6 +12,7 @@ gunicorn==20.0.4
 jmespath==0.10.0
 mccabe==0.6.1
 Pillow==7.2.0
+psycopg2==2.8.6
 pycodestyle==2.6.0
 pyflakes==2.2.0
 python-dateutil==2.8.1
