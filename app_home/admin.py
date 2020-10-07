@@ -1,15 +1,15 @@
 from django.contrib import admin
 
-from app_home.models import Company, Application
-
-
-class CompanyAdmin(admin.ModelAdmin):
-    pass
+from app_home.models import Application, Resume
 
 
 class ApplicationAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Company, CompanyAdmin)
+class ResumeAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Application, ApplicationAdmin)
+admin.site.register(Resume, ResumeAdmin)

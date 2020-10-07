@@ -1,23 +1,918 @@
 [
-  {"model": "app_vacancy.specialty", "pk": 1, "fields": {"code": "frontend", "title": "Фронтенд"}},
-  {"model": "app_vacancy.specialty", "pk": 2, "fields": {"code": "backend", "title": "Бэкенд"}},
-  {"model": "app_vacancy.specialty", "pk": 3, "fields": {"code": "gamedev", "title": "Геймдев"}},
-  {"model": "app_vacancy.specialty", "pk": 4, "fields": {"code": "devops", "title": "Девопс"}},
-  {"model": "app_vacancy.specialty", "pk": 5, "fields": {"code": "design", "title": "Дизайн"}},
-  {"model": "app_vacancy.specialty", "pk": 6, "fields": {"code": "products", "title": "Продукты"}},
-  {"model": "app_vacancy.specialty", "pk": 7, "fields": {"code": "management", "title": "Менеджмент"}},
-  {"model": "app_vacancy.specialty", "pk": 8, "fields": {"code": "testing", "title": "Тестирование"}},
-  {"model": "app_vacancy.vacancy", "pk": 1, "fields": {"title": "Разработчик на Python", "specialty": 2, "company": 3, "description": "Потом добавим", "salary_min": 100000, "salary_max": 150000, "published_at": "2020-03-11"}},
-  {"model": "app_vacancy.vacancy", "pk": 2, "fields": {"title": "Разработчик в проект на Django", "specialty": 2, "company": 6, "description": "Потом добавим", "salary_min": 80000, "salary_max": 90000, "published_at": "2020-03-11"}},
-  {"model": "app_vacancy.vacancy", "pk": 3, "fields": {"title": "Разработчик на Swift в аутсорс компанию", "specialty": 2, "company": 6, "description": "Потом добавим", "salary_min": 120000, "salary_max": 150000, "published_at": "2020-03-11"}},
-  {"model": "app_vacancy.vacancy", "pk": 4, "fields": {"title": "Мидл программист на Python", "specialty": 2, "company": 1, "description": "Потом добавим", "salary_min": 80000, "salary_max": 90000, "published_at": "2020-03-11"}},
-  {"model": "app_vacancy.vacancy", "pk": 5, "fields": {"title": "Питонист в стартап", "specialty": 2, "company": 8, "description": "Потом добавим", "salary_min": 120000, "salary_max": 150000, "published_at": "2020-03-11"}},
-  {"model": "app_home.company", "pk": 1, "fields": {"name": "workiro", "owner": 1}},
-  {"model": "app_home.company", "pk": 2, "fields": {"name": "rebelrage", "owner": 1}},
-  {"model": "app_home.company", "pk": 3, "fields": {"name": "staffingsmarter", "owner": 1}},
-  {"model": "app_home.company", "pk": 4, "fields": {"name": "evilthreath", "owner": 1}},
-  {"model": "app_home.company", "pk": 5, "fields": {"name": "hirey", "owner": 1}},
-  {"model": "app_home.company", "pk": 6, "fields": {"name": "swiftattack", "owner": 1}},
-  {"model": "app_home.company", "pk": 7, "fields": {"name": "troller", "owner": 1}},
-  {"model": "app_home.company", "pk": 8, "fields": {"name": "primalassault", "owner": 1}}
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add specialty",
+    "content_type": 7,
+    "codename": "add_specialty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change specialty",
+    "content_type": 7,
+    "codename": "change_specialty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete specialty",
+    "content_type": 7,
+    "codename": "delete_specialty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view specialty",
+    "content_type": 7,
+    "codename": "view_specialty"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add vacancy",
+    "content_type": 8,
+    "codename": "add_vacancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change vacancy",
+    "content_type": 8,
+    "codename": "change_vacancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete vacancy",
+    "content_type": 8,
+    "codename": "delete_vacancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view vacancy",
+    "content_type": 8,
+    "codename": "view_vacancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add resume",
+    "content_type": 9,
+    "codename": "add_resume"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change resume",
+    "content_type": 9,
+    "codename": "change_resume"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete resume",
+    "content_type": 9,
+    "codename": "delete_resume"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view resume",
+    "content_type": 9,
+    "codename": "view_resume"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add application",
+    "content_type": 10,
+    "codename": "add_application"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change application",
+    "content_type": 10,
+    "codename": "change_application"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete application",
+    "content_type": 10,
+    "codename": "delete_application"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view application",
+    "content_type": 10,
+    "codename": "view_application"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add company",
+    "content_type": 11,
+    "codename": "add_company"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change company",
+    "content_type": 11,
+    "codename": "change_company"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete company",
+    "content_type": 11,
+    "codename": "delete_company"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view company",
+    "content_type": 11,
+    "codename": "view_company"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$bYLt4hhDomOp$XL2Qs3QfYJNtKbZnUTfxsHYZV9zSq4PioEMe0SxghdA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:46.720Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$PimWh4yGk7lp$UzywMWuPTbiu7BRze387FuIoDcCIhcPGkZOwoSLVlHs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:46.934Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$Q0bZBddWMYRP$PNQ7q0kHfvy31LvVWoW2N9YAyNZra+Sd3wQZp0asSmk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user3",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:47.124Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$ZDeKCuJB8zuw$J9bWvA1UdeUfK948HjoF8Xf+Z4/uizk8Nqxb1DOkZpE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user4",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:47.307Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$ahkgCs75nZFi$pklCwaFKY7rCExwn4CBRhPzlsGPCzVGmozMasmxn8Hc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user5",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:47.492Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$JUiJ0gtcmkSx$OkRS7wWfuP1Z8N5VTVEzutP2sz2muXdmNuZqojo8iuA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user6",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:47.676Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$QucQHjvgiPXN$Dl0JCQ/gru7AzLtiHRuz1nzN5WVLfiyDcBicAtg5suc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user7",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:47.863Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$MsXze7FbaPxQ$PvaIwE/S4W3JNipWtkH2GDd5jzrs2lY/yk01TM5dXyA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user8",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-10-07T17:51:48.054Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$ldePzHzEw91c$RkHdcUb930S8Aoeb9KGjDpBnaPXXLrodZJO8Dwcg5lk=",
+    "last_login": "2020-10-07T18:05:23.711Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-10-07T18:02:43.063Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "app_vacancy",
+    "model": "specialty"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "app_vacancy",
+    "model": "vacancy"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "app_home",
+    "model": "resume"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "app_home",
+    "model": "application"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "app_company",
+    "model": "company"
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 1,
+  "fields": {
+    "code": "frontend",
+    "title": "Фронтенд",
+    "picture": "speciality_images/specty_frontend.png",
+    "height_field": 148,
+    "width_field": 148
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 2,
+  "fields": {
+    "code": "backend",
+    "title": "Бэкенд",
+    "picture": "speciality_images/specty_backend.png",
+    "height_field": 138,
+    "width_field": 138
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 3,
+  "fields": {
+    "code": "gamedev",
+    "title": "Геймдев",
+    "picture": "speciality_images/specty_gamedev.png",
+    "height_field": 150,
+    "width_field": 150
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 4,
+  "fields": {
+    "code": "devops",
+    "title": "Девопс",
+    "picture": "speciality_images/specty_devops.png",
+    "height_field": 126,
+    "width_field": 126
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 5,
+  "fields": {
+    "code": "design",
+    "title": "Дизайн",
+    "picture": "speciality_images/specty_design.png",
+    "height_field": 158,
+    "width_field": 158
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 6,
+  "fields": {
+    "code": "products",
+    "title": "Продукты",
+    "picture": "speciality_images/specty_products.png",
+    "height_field": 148,
+    "width_field": 148
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 7,
+  "fields": {
+    "code": "management",
+    "title": "Менеджмент",
+    "picture": "speciality_images/specty_management.png",
+    "height_field": 140,
+    "width_field": 140
+  }
+},
+{
+  "model": "app_vacancy.specialty",
+  "pk": 8,
+  "fields": {
+    "code": "testing",
+    "title": "Тестирование",
+    "picture": "speciality_images/specty_testing.png",
+    "height_field": 154,
+    "width_field": 154
+  }
+},
+{
+  "model": "app_vacancy.vacancy",
+  "pk": 1,
+  "fields": {
+    "title": "Разработчик на Python",
+    "specialty": 2,
+    "company": 3,
+    "skills": "",
+    "description": "Потом добавим",
+    "salary_min": 100000,
+    "salary_max": 150000,
+    "published_at": "2020-03-11"
+  }
+},
+{
+  "model": "app_vacancy.vacancy",
+  "pk": 2,
+  "fields": {
+    "title": "Разработчик в проект на Django",
+    "specialty": 2,
+    "company": 6,
+    "skills": "",
+    "description": "Потом добавим",
+    "salary_min": 80000,
+    "salary_max": 90000,
+    "published_at": "2020-03-11"
+  }
+},
+{
+  "model": "app_vacancy.vacancy",
+  "pk": 3,
+  "fields": {
+    "title": "Разработчик на Swift в аутсорс компанию",
+    "specialty": 2,
+    "company": 6,
+    "skills": "",
+    "description": "Потом добавим",
+    "salary_min": 120000,
+    "salary_max": 150000,
+    "published_at": "2020-03-11"
+  }
+},
+{
+  "model": "app_vacancy.vacancy",
+  "pk": 4,
+  "fields": {
+    "title": "Мидл программист на Python",
+    "specialty": 2,
+    "company": 1,
+    "skills": "",
+    "description": "Потом добавим",
+    "salary_min": 80000,
+    "salary_max": 90000,
+    "published_at": "2020-03-11"
+  }
+},
+{
+  "model": "app_vacancy.vacancy",
+  "pk": 5,
+  "fields": {
+    "title": "Питонист в стартап",
+    "specialty": 2,
+    "company": 8,
+    "skills": "",
+    "description": "Потом добавим",
+    "salary_min": 120000,
+    "salary_max": 150000,
+    "published_at": "2020-03-11"
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 1,
+  "fields": {
+    "name": "workiro",
+    "location": "Default",
+    "logo": "company_images/logo1.png",
+    "height_field": 232,
+    "width_field": 416,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 1
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 2,
+  "fields": {
+    "name": "rebelrage",
+    "location": "Default",
+    "logo": "company_images/logo2.png",
+    "height_field": 244,
+    "width_field": 438,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 2
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 3,
+  "fields": {
+    "name": "staffingsmarter",
+    "location": "Default",
+    "logo": "company_images/logo3.png",
+    "height_field": 220,
+    "width_field": 396,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 3
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 4,
+  "fields": {
+    "name": "evilthreath",
+    "location": "Default",
+    "logo": "company_images/logo4.png",
+    "height_field": 234,
+    "width_field": 424,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 4
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 5,
+  "fields": {
+    "name": "hirey",
+    "location": "Default",
+    "logo": "company_images/logo5.png",
+    "height_field": 196,
+    "width_field": 352,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 5
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 6,
+  "fields": {
+    "name": "swiftattack",
+    "location": "Default",
+    "logo": "company_images/logo6.png",
+    "height_field": 182,
+    "width_field": 328,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 6
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 7,
+  "fields": {
+    "name": "troller",
+    "location": "Default",
+    "logo": "company_images/logo7.png",
+    "height_field": 188,
+    "width_field": 340,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 7
+  }
+},
+{
+  "model": "app_company.company",
+  "pk": 8,
+  "fields": {
+    "name": "primalassault",
+    "location": "Default",
+    "logo": "company_images/logo8.png",
+    "height_field": 196,
+    "width_field": 354,
+    "description": "Some desc",
+    "employee_count": "0",
+    "owner": 8
+  }
+}
 ]

@@ -8,7 +8,7 @@ django.setup()
 
 import mock_data as data
 
-from app_home.models import Company
+from app_company.models import Company
 from app_vacancy.models import Vacancy, Specialty
 
 
@@ -23,8 +23,8 @@ if __name__ == '__main__':
 
     Company.objects.bulk_create(
         [
-            Company(name=company['title'], owner=1)
-            for company in data.companies
+            Company(name=company['title'], owner=num)
+            for num, company in enumerate(data.companies, start=1)
         ]
     )
 

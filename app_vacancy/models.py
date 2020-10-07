@@ -3,6 +3,8 @@ from datetime import date
 from django.conf import settings
 from django.db import models
 
+from app_company.models import Company
+
 
 class Specialty(models.Model):
     code = models.CharField(max_length=80, unique=True)
@@ -23,7 +25,7 @@ class Vacancy(models.Model):
     title = models.CharField(max_length=120, verbose_name='Название вакансии')
     specialty = models.ForeignKey(Specialty, on_delete=models.CASCADE, related_name="vacancies",
                                   verbose_name='Специальность')
-    company = models.ForeignKey('app_home.Company', on_delete=models.CASCADE, related_name="vacancies")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="vacancies")
     skills = models.CharField(max_length=120, verbose_name='Требуемые навыки')
     description = models.TextField(verbose_name='Описание вакансии')
     salary_min = models.PositiveIntegerField(verbose_name='Зарплата от')

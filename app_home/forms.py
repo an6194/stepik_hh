@@ -1,6 +1,6 @@
 from django.forms import ModelForm, ModelChoiceField
 
-from app_home.models import Application, Company, Resume
+from app_home.models import Application, Resume
 from app_vacancy.models import Vacancy
 
 
@@ -13,12 +13,6 @@ class ApplicationForm(ModelForm):
     class Meta:
         model = Application
         fields = ['written_username', 'written_phone', 'written_cover_letter']
-
-
-class CompanyForm(ModelForm):
-    class Meta:
-        model = Company
-        fields = ['name', 'logo', 'location', 'employee_count', 'description']
 
 
 class VacancyForm(ModelForm):

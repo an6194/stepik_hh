@@ -16,33 +16,21 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
 from app_home.views import MainView, CompanyView, custom_handler404, custom_handler500, \
-    MyCompanyView, MyVacanciesView, MyVacancyView, CreateCompanyView, CreateVacancyView, \
     MyResumeView, CreateResumeView, SearchView
-from stepik_hh.views import MyLoginView, MySignupView
 
 urlpatterns = [
     path('', MainView.as_view(), name='main'),
     path('search/', SearchView.as_view(), name='search'),
     path('companies/<int:company_id>/', CompanyView.as_view(), name='company'),
     path('vacancies/', include('app_vacancy.urls')),
-    path('mycompany/', MyCompanyView.as_view(), name='my_company'),
-    path('mycompany/create/', CreateCompanyView.as_view(), name='create_company'),
-    path('mycompany/vacancies/', MyVacanciesView.as_view(), name='my_vacancies'),
-    path('mycompany/vacancies/create/', CreateVacancyView.as_view(), name='create_vacancy'),
-    path('mycompany/vacancies/<int:vacancy_id>/', MyVacancyView.as_view(), name='my_vacancy'),
+    path('mycompany/', include('app_company.urls')),
     path('myresume/', MyResumeView.as_view(), name='my_resume'),
     path('myresume/create/', CreateResumeView.as_view(), name='create_resume'),
+    path('', include('app_authentication.urls')),
     path('admin/', admin.site.urls),
-]
-
-urlpatterns += [
-    path('login/', MyLoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('signup/', MySignupView.as_view(), name='signup'),
 ]
 
 handler404 = custom_handler404
