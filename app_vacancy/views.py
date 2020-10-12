@@ -1,5 +1,5 @@
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
@@ -42,22 +42,37 @@ class VacancyView(View):
             'form': form
         })
 
+    def post(self, request, vacancy_id, *args, **kwargs):
+        vacancy = get_object_or_404(Vacancy, id=vacancy_id)
+        if not request.user.is_authenticated:
+            return redirect(settings.LOGIN_URL)
+        try:
+            application = Application.objects.get(vacancy=vacancy, user=request.user)
+        except Application.DoesNotExist:
+            form = ApplicationForm(request.POST)
+        else:
+            form = ApplicationForm(request.POST, instance=application)
+        if form.is_valid():
+            new_application = form.save(commit=False)
+            new_application.user = request.user
+            new_application.vacancy = vacancy
+            new_application.save()
+            return redirect('application_send', vacancy_id)
+        else:
+            return render(request, 'vacancy.html', context={
+                'vacancy': vacancy,
+                'form': form
+            })
+
 
 class ApplicationSendView(LoginRequiredMixin, View):
 
     def get(self, request, vacancy_id, *args, **kwargs):
         vacancy = get_object_or_404(Vacancy, id=vacancy_id)
         try:
-            Application.objects.get(vacancy=vacancy, user__id=request.user.id)
+            Application.objects.get(vacancy=vacancy, user=request.user)
         except Application.DoesNotExist:
             return HttpResponseForbidden
         return render(request, 'sent.html', context={
             'vacancy': vacancy,
         })
-
-    def post(self, request, vacancy_id, *args, **kwargs):
-        f = ApplicationForm(request.POST).save(commit=False)
-        f.vacancy = Vacancy.objects.get(id=vacancy_id)
-        f.user = User.objects.get(id=request.user.id)
-        f.save()
-        return redirect('application_send', vacancy_id)

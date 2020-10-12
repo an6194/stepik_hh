@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Count, Q
 from django.http import HttpResponseNotFound, HttpResponseServerError
@@ -61,9 +60,15 @@ class MyResumeView(LoginRequiredMixin, View):
             resume = request.user.resume
         except Resume.DoesNotExist:
             return render(request, 'resume_create.html')
-        ResumeForm(request.POST, instance=resume).save()
-        messages.add_message(request, messages.SUCCESS, 'Ваше резюме обновлено!')
-        return redirect('my_resume')
+        form = ResumeForm(request.POST, instance=resume)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Ваше резюме обновлено!')
+            return redirect('my_resume')
+        else:
+            return render(request, 'resume_edit.html', context={
+                'form': form,
+            })
 
 
 class CreateResumeView(LoginRequiredMixin, View):
@@ -74,11 +79,17 @@ class CreateResumeView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
-        f = ResumeForm(request.POST).save(commit=False)
-        f.user = User.objects.get(id=request.user.id)
-        f.save()
-        messages.add_message(request, messages.SUCCESS, 'Ваше резюме успешно создано!')
-        return redirect('my_resume')
+        form = ResumeForm(request.POST)
+        if form.is_valid():
+            new_resume = form.save(commit=False)
+            new_resume.user = request.user
+            new_resume.save()
+            messages.add_message(request, messages.SUCCESS, 'Ваше резюме успешно создано!')
+            return redirect('my_resume')
+        else:
+            return render(request, 'resume_edit.html', context={
+                'form': form,
+            })
 
 
 def custom_handler404(request, exception):

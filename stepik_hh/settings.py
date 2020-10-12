@@ -86,8 +86,7 @@ WSGI_APPLICATION = 'stepik_hh.wsgi.application'
 
 if not DEBUG:
     DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
-
-if DEBUG:
+elif DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -132,8 +131,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 if not DEBUG:
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'stepik_hh.custom_storage.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'stepik_hh.custom_storage.MediaStorage'
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']

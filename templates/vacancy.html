@@ -27,14 +27,16 @@
         <div style="line-height: 1.8;">
           <p>{{ vacancy.description }}</p>
         </div>
-        <form method="post" action="{% url 'application_send' vacancy.id %}" class="card mt-4 mb-3"> {% csrf_token %}
-          {% load crispy_forms_tags %}
-          <div class="card-body mx-3">
-            <p class="h5 mt-3 font-weight-normal">Отозваться на вакансию</p>
-            {{ form|crispy }}
-            <input type="submit" class="btn btn-primary mt-4 mb-2" value="Записаться на пробный урок">
-          </div>
-        </form>
+        {% if request.user.is_authenticated %}
+          <form method="post" class="card mt-4 mb-3"> {% csrf_token %}
+            {% load crispy_forms_tags %}
+            <div class="card-body mx-3">
+              <p class="h5 mt-3 font-weight-normal">Отозваться на вакансию</p>
+              {{ form|crispy }}
+              <input type="submit" class="btn btn-primary mt-4 mb-2" value="Записаться на пробный урок">
+            </div>
+          </form>
+        {% endif %}
       </section>
     </div>
   </div>
