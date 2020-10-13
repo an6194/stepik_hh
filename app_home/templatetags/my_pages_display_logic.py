@@ -4,7 +4,7 @@ register = template.Library()
 
 
 @register.filter
-def my_background(value):
+def is_my_page(value):
     if value.startswith('/my'):
         return True
     return False
@@ -17,3 +17,11 @@ def my_user_menu(value):
     elif value.startswith('/mycompan'):
         return 1
     return 0
+
+
+@register.filter
+def not_auth_page(value):
+    auth_pages = ('/login/', '/logout/', '/signup/')
+    if value in auth_pages:
+        return False
+    return True
