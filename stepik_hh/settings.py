@@ -72,8 +72,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'app_home.context_processors.my_pages',
             ],
+            'libraries': {
+                'my_pages_display_logic': 'app_home.templatetags.my_pages_display_logic',
+            },
         },
     },
 ]
