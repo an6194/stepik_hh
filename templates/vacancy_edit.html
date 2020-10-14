@@ -11,13 +11,11 @@
           <!-- Tab -->
           <section>
             <h2 class="h4 pt-2 pb-3">Вакансии</h2>
-            {% if messages %}
-              {% for message in messages %}
-                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                  <p class="alert alert-info" role="alert">{{ message }}</p>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
+            {% for message in messages %}
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p class="alert alert-info" role="alert">{{ message }}</p>
+              {% endif %}
+            {% endfor %}
             <form method="post"> {% csrf_token %}
               {% load crispy_forms_tags %}
               {{ form|crispy }}

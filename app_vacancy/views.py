@@ -12,10 +12,10 @@ from app_vacancy.models import Specialty, Vacancy
 class VacanciesView(View):
 
     def get(self, request, *args, **kwargs):
-        spec = 'Все вакансии'
+        specialty_title = 'Все вакансии'
         vacancies = Vacancy.objects.all()
         return render(request, 'vacancies.html', context={
-            'spec': spec,
+            'specialty_title': specialty_title,
             'vacancies': vacancies,
         })
 
@@ -23,11 +23,11 @@ class VacanciesView(View):
 class VacanciesBySpecView(View):
 
     def get(self, request, spec, *args, **kwargs):
-        spec = get_object_or_404(Specialty, code=spec)
-        vacancies = Vacancy.objects.filter(specialty=spec)
-        spec = spec.title
+        specialty = get_object_or_404(Specialty, code=spec)
+        vacancies = Vacancy.objects.filter(specialty=specialty)
+        specialty_title = spec.title
         return render(request, 'vacancies.html', context={
-            'spec': spec,
+            'specialty_title': specialty_title,
             'vacancies': vacancies,
         })
 
@@ -58,11 +58,10 @@ class VacancyView(View):
             new_application.vacancy = vacancy
             new_application.save()
             return redirect('application_send', vacancy_id)
-        else:
-            return render(request, 'vacancy.html', context={
-                'vacancy': vacancy,
-                'form': form
-            })
+        return render(request, 'vacancy.html', context={
+            'vacancy': vacancy,
+            'form': form
+        })
 
 
 class ApplicationSendView(LoginRequiredMixin, View):

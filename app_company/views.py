@@ -33,10 +33,9 @@ class MyCompanyView(LoginRequiredMixin, View):
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Информация о компании обновлена')
             return redirect('my_company')
-        else:
-            return render(request, 'company_edit.html', context={
-                'form': form,
-            })
+        return render(request, 'company_edit.html', context={
+            'form': form,
+        })
 
 
 class CreateCompanyView(LoginRequiredMixin, View):
@@ -54,10 +53,9 @@ class CreateCompanyView(LoginRequiredMixin, View):
             new_company.save()
             messages.add_message(request, messages.SUCCESS, 'Ваша компания успешно создана!')
             return redirect('my_company')
-        else:
-            return render(request, 'company_edit.html', context={
-                'form': form,
-            })
+        return render(request, 'company_edit.html', context={
+            'form': form,
+        })
 
 
 class MyVacanciesView(LoginRequiredMixin, View):
@@ -96,10 +94,9 @@ class CreateVacancyView(LoginRequiredMixin, View):
             new_vacancy.company = company
             new_vacancy.save()
             return redirect('my_vacancies')
-        else:
-            return render(request, 'vacancy_edit.html', context={
-                'form': form,
-            })
+        return render(request, 'vacancy_edit.html', context={
+            'form': form,
+        })
 
 
 class MyVacancyView(LoginRequiredMixin, View):
@@ -131,9 +128,8 @@ class MyVacancyView(LoginRequiredMixin, View):
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Вакансия обновлена')
             return redirect('my_vacancy', vacancy_id)
-        else:
-            applications = Application.objects.filter(vacancy__id=vacancy_id)
-            return render(request, 'vacancy_edit.html', context={
-                'form': form,
-                'applications': applications,
-            })
+        applications = Application.objects.filter(vacancy__id=vacancy_id)
+        return render(request, 'vacancy_edit.html', context={
+            'form': form,
+            'applications': applications,
+        })

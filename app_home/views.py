@@ -65,10 +65,9 @@ class MyResumeView(LoginRequiredMixin, View):
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Ваше резюме обновлено!')
             return redirect('my_resume')
-        else:
-            return render(request, 'resume_edit.html', context={
-                'form': form,
-            })
+        return render(request, 'resume_edit.html', context={
+            'form': form,
+        })
 
 
 class CreateResumeView(LoginRequiredMixin, View):
@@ -86,10 +85,9 @@ class CreateResumeView(LoginRequiredMixin, View):
             new_resume.save()
             messages.add_message(request, messages.SUCCESS, 'Ваше резюме успешно создано!')
             return redirect('my_resume')
-        else:
-            return render(request, 'resume_edit.html', context={
-                'form': form,
-            })
+        return render(request, 'resume_edit.html', context={
+            'form': form,
+        })
 
 
 def custom_handler404(request, exception):

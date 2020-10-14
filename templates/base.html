@@ -10,7 +10,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
   {% load my_pages_display_logic %}
-  {% if request.path|is_my_page %}
+  {% if request.path|startswith:"/my" %}
     <style>
       body {
         background-color: #F6F2E6;

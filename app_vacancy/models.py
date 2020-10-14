@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.conf import settings
 from django.db import models
 
@@ -23,11 +21,11 @@ class Specialty(models.Model):
 
 class Vacancy(models.Model):
     title = models.CharField(max_length=120, verbose_name='Название вакансии')
-    specialty = models.ForeignKey(Specialty, on_delete=models.CASCADE, related_name="vacancies",
-                                  verbose_name='Специальность')
+    specialty = models.ForeignKey(Specialty, on_delete=models.CASCADE,
+                                  related_name="vacancies", verbose_name='Специальность')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="vacancies")
     skills = models.CharField(max_length=120, verbose_name='Требуемые навыки')
     description = models.TextField(verbose_name='Описание вакансии')
     salary_min = models.PositiveIntegerField(verbose_name='Зарплата от')
     salary_max = models.PositiveIntegerField(verbose_name='Зарплата до')
-    published_at = models.DateField(default=date.today)
+    published_at = models.DateField(auto_now=True, verbose_name='Опубликовано')

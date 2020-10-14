@@ -1,4 +1,5 @@
 from django.forms import ModelForm, ModelChoiceField
+from django.utils.translation import gettext_lazy as _
 
 from app_home.models import Application, Resume
 from app_vacancy.models import Vacancy
@@ -13,6 +14,10 @@ class ApplicationForm(ModelForm):
     class Meta:
         model = Application
         fields = ['written_username', 'written_phone', 'written_cover_letter']
+        labels = {
+            'written_username': _('Вас зовут'),
+            'written_phone': _('Ваш телефон'),
+        }
 
 
 class VacancyForm(ModelForm):

@@ -17,4 +17,5 @@ class Company(models.Model):
     width_field = models.PositiveIntegerField(default=0)
     description = models.TextField(verbose_name='Информация о&nbsp;компании')
     employee_count = models.CharField(max_length=80, verbose_name='Количество человек в компании')
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name="company")
+    owner = models.OneToOneField(User, on_delete=models.CASCADE,
+                                 related_name="company", verbose_name='Владелец компании')
